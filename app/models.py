@@ -18,4 +18,3 @@ class Contact(Model):
 
     class Meta:
         table = "contacts"
-        indexes = ["email", "phone_number", "linked_id"]
