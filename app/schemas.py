@@ -2,8 +2,6 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Optional, List
 
-from app.models import Contact
-
 class IdentifyRequest(BaseModel):
     email: Optional[str] = None
     phone_number: Optional[str] = Field(None, alias="phoneNumber")
@@ -18,7 +16,7 @@ class IdentifyResponse(BaseModel):
     contact: ContactResponse
 
 class ListUserData(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True, populate_by_name=True)
 
     contactId: int = Field(..., alias="id")
     phoneNumber: Optional[str] = Field(None, alias="phone_number")
@@ -30,5 +28,5 @@ class ListUserData(BaseModel):
     deletedAt: Optional[datetime] = Field(None, alias="deleted_at")
 
     @classmethod
-    def from_contact(cls, contact: Contact):
+    def from_contact(cls, contact: dict):
         return cls.model_validate(contact)
