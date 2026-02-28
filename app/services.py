@@ -1,4 +1,4 @@
-from app.models import Contact
+from app.models import Contact, LinkPrecedence
 from app.schemas import IdentifyRequest, IdentifyResponse, ContactResponse, ListUserData
 from typing import List, Optional, Tuple
 from tortoise.transactions import in_transaction
@@ -59,7 +59,7 @@ class ContactService:
             email=email,
             phone_number=phone_number,
             linked_id=None,
-            link_precedence="primary"
+            link_precedence=LinkPrecedence.primary
         )
     
     @staticmethod
@@ -105,7 +105,7 @@ class ContactService:
                 email=email,
                 phone_number=phone_number,
                 linked_id=primary_contact.id,
-                link_precedence="secondary"
+                link_precedence=LinkPrecedence.secondary
             )
             all_contacts.append(new_contact)
         

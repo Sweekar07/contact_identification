@@ -11,7 +11,7 @@ class Contact(Model):
     phone_number = fields.CharField(max_length=20, null=True)
     email = fields.CharField(max_length=255, null=True)
     linked_id = fields.IntField(null=True)
-    link_precedence = fields.CharField(LinkPrecedence)
+    link_precedence = fields.CharField(LinkPrecedence, default=LinkPrecedence.primary)
     created_at = fields.DatetimeField(auto_now_add=True)
     updated_at = fields.DatetimeField(auto_now=True)
     deleted_at = fields.DatetimeField(null=True)
